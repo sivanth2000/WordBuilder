@@ -2,6 +2,39 @@
 #include<iomanip>
 
 
+using namespace std;
+
+void title()
+{
+            
+    cout<<setw(50)<<"   W                   W                                                                   "<<endl;
+    cout<<setw(50)<<"    O                 O      B U I L D                                                     "<<endl;
+    cout<<setw(50)<<"     R               R       U        E                                                    "<<endl;
+    cout<<setw(50)<<"      D             D        I        R                                                    "<<endl;
+    cout<<setw(50)<<"       W     W     W         L D I U B                                                     "<<endl;
+    cout<<setw(50)<<"        O   O O   O          D        B                                                    "<<endl;
+    cout<<setw(50)<<"         R R   R R           E        U                                                    "<<endl;
+    cout<<setw(50)<<"          D     D         O  R E D L I                                                     "<<endl;
+    cout<<setw(50)<<" \n                                       -by B.Jaya Shankar                               "<<endl;
+    
+}
+
+
+void about()
+{
+    char x;
+    cout<<"Rules of the game: "<<endl;
+    cout<<"1.Player must type a valid string starting with given letter"<<endl;
+    cout<<"2.The game is compeleted only when one player survives"<<endl;
+    cout<<"3.For help type '..' as answer"<<endl;
+    cout<<"4.If a player wants to quit type '~' as answer"<<endl;
+    cout<<"SCORING:"<<endl;
+    cout<<"Each player gets score based on the length of the string. "<<endl;
+    cout<<"The score in particular round is multiplied by the particular round"<<endl;
+    cout<<"Example: if a player enters \"elephant\" its lenght is 7 so in first round the score will be 7 when He enters the same word in 'x'th turn then score is 7*x"<<endl;
+    cout<<"Press any key and then Enter to exit"<<endl;
+    cin>>x;
+}
 
 void menu()
 {
