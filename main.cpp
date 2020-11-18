@@ -1,8 +1,11 @@
 
 #include "functions/playerClass.cpp"
 #include "functions/load.c"
+#include "functions/loadh.c"
 #include "functions/datac.c"
 #include "functions/check.c"
+#include "functions/help.c"
+#include "functions/against.c"
 #include "functions/design.cpp"
 
 
@@ -15,6 +18,7 @@
 
 
 #define wordn "words/words_alpha.txt"
+#define wordc "words/india.txt"
 
 using namespace std;
 
@@ -24,11 +28,14 @@ int main()
      int number,count,len,de,mode,limit,ch,men,level,tp=1;
      char next='a',he;
      bool response;
+     coans coscore;
      char hel[]="..";
      player* arr;
      player AI('x');
+     ret rooth,comp;
      node *root;
      start:
+     title();
      again:
      menu();
      cin>>men;
@@ -48,15 +55,18 @@ int main()
 
          if(ch==1)
          {
+            rooth=loadh(wordn,ch);
             root=load(wordn);
          }
          else if(ch==2)
          {
-            root=load(wordn);
+            root=load(wordc);
+            rooth=loadh(wordc,ch);
          }
      }
      if(men==3)
      {
+         about();
          goto again;
      }
 
@@ -70,6 +80,15 @@ int main()
       {
          cout<<"Enter number of players: ";
          cin>>number;
+      }
+      if(men==1)
+      {
+         level=difficulty();
+         if(ch==1)
+            comp=datac(wordn,ch,level);
+         else if(ch==2)
+            comp=datac(wordc,ch,level);
+         number=1;
       }
      count=number;
      arr=new player[number];
@@ -87,7 +106,30 @@ int main()
                   cout<<"The starting letter is : "<<next<<endl;
                   cout<<"it's "<<arr[i].dispname()<<" turn : ";
                   cin>>answer;
-                  if(answer[0]=='~')
+
+                  if(answer[0]=='.' && answer[1]=='.')
+                  {
+                     int k=arr[i].dechelp();
+                     if(k<=-1)
+                        cout<<"Sorry We cannot help you ,You are out of lives"<<endl;
+                     else
+                     {
+                        he=help(next,&rooth,root);
+                        if(he=='|')
+                        {
+                           do
+                           {
+                              he=(char)(rand()%26)+97;
+                           } while (he==next);
+                           cout<<"Player can start with the following letter:\n";
+                           goto repeat;
+                        }
+                        else
+                           cout<<"You still have "<<k<<" hints left.."<<endl;
+                        break;
+                     }
+                  }
+                  else if(answer[0]=='~')
                   {
                      arr[i].errors=-1;
                      cout<<"\n"<<arr[i].dispname()<<" has quit the game"<<endl;
@@ -142,6 +184,24 @@ int main()
                   }
                }
            }
+         }
+         if(men==1 && number==1)
+         {
+            coscore=against(next,&comp,root,level);
+            AI.addscore(coscore.l);
+            if(AI.getscore()>=limit && mode==1 )
+            {
+               tp=1;
+               count=0;
+               break;
+            }
+            next=coscore.nex;
+            if(next=='?')
+            {
+               cout<<"I quit the game"<<endl;
+               AI.errors=-1;
+               break;
+            }
          }
      }
     int x=finalscore(arr,AI,number,men,mode);
