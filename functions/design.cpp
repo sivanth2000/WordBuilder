@@ -15,7 +15,7 @@ void title()
     cout<<setw(50)<<"        O   O O   O          D        B                                                    "<<endl;
     cout<<setw(50)<<"         R R   R R           E        U                                                    "<<endl;
     cout<<setw(50)<<"          D     D         O  R E D L I                                                     "<<endl;
-    cout<<setw(50)<<" \n                                       -by B.Jaya Shankar                               "<<endl;
+    cout<<setw(50)<<" \n                                       -by B.Sivanth                            "<<endl;
     
 }
 
